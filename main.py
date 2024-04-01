@@ -47,6 +47,14 @@ def tables():
     else:
         return render_template('show_table.html', data=[], columns=[])
 
+#Add new supplier
+@app.route("/add-supplier", methods=['GET', 'POST'])
+def add_supplier():
+    conn = get_db_connection()
+    cur = conn.cursor(MySQLdb.cursors.DictCursor)
+    details = request.form
+    #check if supplier already exists
+    #If not add them to the DB
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=PORT)
