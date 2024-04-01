@@ -2,9 +2,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Show Tables</title>
 </head>
 <body>
+<h1>Show Tables</h1>
+    <form action="/show-table" method="post">
+        Table Name: <input type="text" name="name">
+        <input type="submit" value="Find Table">
+    </form>
+<table>
+
+  <tr>
+      {% for column in columns %}
+    <th>{{column.capitalize()}}</th>
+      {% endfor %}
+  </tr>
+     {% for row in data %}
+  <tr>
+      {% for column in columns %}
+    <td>{{row[column]}}</td>
+      {% endfor %}
+  </tr>
+    {% endfor %}
+
+</table>
 
 </body>
 </html>
