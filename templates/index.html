@@ -4,16 +4,41 @@
 <head>
     <meta charset="UTF-8">
     <title>MUC Web App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 
 <body>
-    <h1>MUC Web App</h1>
-    <ul>
-        <li><a href="/show-table"> Show Table</a></li>
-        <li><a href="/add-supplier">Add New Supplier</a></li>
-        <li><a href="/get-expenses">Get Annual Expenses for Parts</a></li>
-        <li><a href="/project-budget">Budget Projection</a></li>
-    </ul>
+    <header>
+        <img src="{{ url_for('static', filename='logo.webp') }}" alt="MUC Logo" id="navbar-logo">
+    </header>
+    </header>
+    <main>
+        <h1>MUC Database</h1>
+        <div class="icon-set">
+            <!-- Example for one icon -->
+            <div class="icon-item">
+                <a href="/show-table"><img src="{{ url_for('static', filename='clipboard.webp') }}" alt="Orders"></a>
+                <span>Show Tables</span>
+            </div>
+            <div class="icon-item">
+                <a href="/add-supplier"><img src="{{ url_for('static', filename='spanner.webp') }}" alt="Orders"></a>
+                <span>Add Suppliers</span>
+            </div>
+            <div class="icon-item">
+                <a href="/get-expenses"><img src="{{ url_for('static', filename='pie_chart.webp') }}" alt="Orders"></a>
+                <span>Annual Expenses</span>
+            </div>
+            <div class="icon-item">
+                <a href="/project-budget"><img src="{{ url_for('static', filename='supplier.webp') }}" alt="Orders"></a>
+                <span>Budget Projection</span>
+            </div>
+            <!-- Repeat for each icon -->
+        </div>
+    </main>
+    <footer>
+        <p>© MUC </p>
+    </footer>
 </body>
+
 
 </html>
