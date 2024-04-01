@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Annual Expenses for parts</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    <h1>Get Annual Expenses for parts</h1>
+    <form action="/get-expenses" method="post">
+        <label>Start Year: </label>
+        <input name="start" type="number" placeholder="YYYY" min="2016" max="2023">
+        <label>End Year: </label>
+        <input name="end" type="number" placeholder="YYYY" min="2016" max="2023">
+        <script>
+            document.querySelector("input[type=number]")
+                .oninput = e => console.log(new Date(e.target.valueAsNumber, 0, 1))
+        </script>
+        <input type="submit" value="Get Expenses">
+    </form>
+    <a href="/">Back to Home</a>
+    {% if data!= [] %}
+    <table>
+        <tr>
+            <th>Year</th>
+            <th>Total Expenses</th>
+        </tr>
+        {% for row in data %}
+        <tr>
+            <td>{{row[0]}}</td>
+            <td>{{row[1]}}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+    {% endif %}
+</body>
+
+</html>
