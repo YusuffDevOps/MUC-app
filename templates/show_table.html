@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Show Tables</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
 <h1>Show Tables</h1>
@@ -10,8 +11,8 @@
         Table Name: <input type="text" name="name">
         <input type="submit" value="Find Table">
     </form>
+<a href="/">Back to Home</a>
 <table>
-
   <tr>
       {% for column in columns %}
     <th>{{column.capitalize()}}</th>
