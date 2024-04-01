@@ -15,6 +15,7 @@
         <input type="submit" value="Project Budget">
     </form>
     <a href="/">Back to Home</a>
+    {% if data!= [] %}
     <table>
         <tr>
             <th>Year</th>
@@ -28,7 +29,7 @@
         {% endfor %}
 
     </table>
-
+    {% endif %}
 </body>
 
 </html>

@@ -102,6 +102,12 @@ def project_budget():
             arr.append((recent_year+i, float("{:.2f}".format((recent_expense)*(total_rate)**(i)))))
         return render_template('project_budget.html', data=arr, currency=locale.currency)
 
+@app.route("/add-supplier", methods=['GET', 'POST'])
+def add_supplier():
+    if request.method == "GET":
+        return render_template('add_supplier.html', data=[])
+
+
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=PORT)
