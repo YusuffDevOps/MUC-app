@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Budget Projection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    <h1>Budget Projection</h1>
+    <form action="/project-budget" method="post">
+        Number of years: <input type="number" name="numYears">
+        Inflation rate value : <input type="number" name="rate" min="1" max="100">
+        <input type="submit" value="Project Budget">
+    </form>
+    <a href="/">Back to Home</a>
+    <table>
+        <tr>
+            <th>Year</th>
+            <th>Projected Expenses</th>
+        </tr>
+        {% for row in data %}
+        <tr>
+            <td>{{row[0]}}</td>
+            <td>{{currency(row[1], grouping=True)}}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+</body>
+
+</html>
