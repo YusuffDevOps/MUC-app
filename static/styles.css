@@ -9,7 +9,7 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 1em;
-  background-color: #1a1a1a;
+  background-color: #f4f4f4;
 }
 
 #navbar-logo {
@@ -44,7 +44,7 @@ main {
 }
 
 body {
-  background-color: white;
+  background-color: #f4f4f4;
   color: black;
   font-family: Arial, sans-serif;
 }
@@ -57,7 +57,7 @@ body {
 }
 
 .icon-item {
-  background-color: black;
+  background-color: #f0f8ff;
   border-radius: 10px;
   margin: 1em;
   padding: 1em;
@@ -74,7 +74,7 @@ footer {
   text-align: center;
   margin-top: 50px;
   padding: 1em;
-  background-color: black;
+  background-color: #f4f4f4;
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -143,6 +143,7 @@ tr:nth-child(even) {
 
 /* Input styles */
 input[type="text"],
+input[type="email"],
 input[type="submit"] {
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -150,6 +151,7 @@ input[type="submit"] {
   margin-bottom: 10px;
 }
 
+input[type="email"],
 input[type="text"] {
   width: calc(100% - 22px);
   /* Adjust width considering padding and border */

@@ -32,16 +32,23 @@ def tables():
     cur = conn.cursor(MySQLdb.cursors.DictCursor)
     if request.method == 'POST':
         #Get the submitted table name from our form
-        table_name = request.form['name']
-        # execute query to get table elements
-        cur.execute(f"SELECT * FROM {table_name}")
-        data = cur.fetchall()
-        #Get name of columns in our corresponding table
-        cur.execute(f"SELECT column_name FROM information_schema.columns WHERE table_name = '{table_name}'")
-        columns = cur.fetchall()
+        data = []
         arr =[]
-        for c in columns:
-            arr.append(c['COLUMN_NAME'])
+        table_name = request.form['name']
+        if table_name == "suppliers":
+            cur.execute(f"""SELECT supplier._id, name, email, telephone.tel 
+            FROM supplier, telephone WHERE supplier._id = telephone.sup_id;""")
+            data = cur.fetchall()
+            arr = ["_id", "name", "email", "tel"]
+        elif table_name == "parts":
+            cur.execute(f"SELECT * FROM {table_name}")
+            data = cur.fetchall()
+            arr = ["_id","price","description"]
+        elif table_name == "orders":
+            cur.execute("""SELECT orders.order_date, orders.sup_id, part_orders.part_id, part_orders.qty
+            FROM part_orders, orders WHERE part_orders.order_id = orders._id;""")
+            data = cur.fetchall()
+            arr =["order_date","sup_id","part_id","qty"]
         cur.close()
         conn.close()
         # return to frontend the data in table_name and the corresponding columns in table_name
@@ -91,7 +98,7 @@ def project_budget():
         #SQL query to get the recent expense 
         cur.execute("""SELECT YEAR(order_date) as year, sum(price*qty) 
         FROM part_orders, parts, orders 
-        WHERE part_orders.part_id = parts._id AND orders._id = part_orders.order_id AND YEAR(order_date)=2023 
+        WHERE part_orders.part_id = parts._id AND orders._id = part_orders.order_id AND YEAR(order_date)=2022
         GROUP BY YEAR(order_date);""")
         data = cur.fetchall()
         recent_year = data[0][0]
@@ -100,12 +107,42 @@ def project_budget():
         #Add tuple containg new year and projected expenses for the year
         for i in range (1, years+1):
             arr.append((recent_year+i, float("{:.2f}".format((recent_expense)*(total_rate)**(i)))))
+        cur.close()
+        conn.close()
         return render_template('project_budget.html', data=arr, currency=locale.currency)
 
 @app.route("/add-supplier", methods=['GET', 'POST'])
 def add_supplier():
     if request.method == "GET":
         return render_template('add_supplier.html', data=[])
+    else:
+        _id = request.form["id"]
+        name = request.form["name"]
+        email = request.form["email"]
+        numbers = request.form["numbers"].split(",")
+        conn = get_db_connection()
+        cur = conn.cursor()
+        #Check if supplier exists with _id
+        cur.execute(f"SELECT * FROM supplier WHERE _id = {_id}")
+        data = cur.fetchall()
+        #If supplier Doesn't exist
+        if data == ():
+            #Insert  into supplier relation
+            cur.execute(f"INSERT INTO supplier(_id, name, email) VALUES ({_id}, '{name}', '{email}')")
+            #Insert numbers into telephone relation
+            for number in numbers:
+                cur.execute(f"INSERT INTO telephone(sup_id, tel ) VALUES ({_id}, '{number}')")
+            conn.commit()
+            cur.execute(f"""SELECT supplier._id, name, email, telephone.tel 
+            FROM supplier, telephone WHERE supplier._id = telephone.sup_id AND supplier._id={_id} ;""")
+            data = cur.fetchall()
+            print(data)
+            arr = ["_id", "name", "email", "tel"]
+            cur.close()
+            conn.close()
+            return render_template('add_supplier.html', data=data, columns=arr)
+        else:
+            return render_template('add_supplier.html', data=[], error="Supplier already exists please try different _id")
 
 
 

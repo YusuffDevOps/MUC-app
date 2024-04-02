@@ -2,35 +2,45 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Add Supplier</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <meta charset="UTF-8">
+  <title>Add Supplier</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 
 <body>
-    <h1>Add Supplier</h1>
-    <form action="/add-supplier" method="post">
-        Table Name: <input type="text" name="name">
-        <input type="submit" value="Add Supplier">
-    </form>
-    <a href="/">Back to Home</a>
+  <h1>Add Supplier</h1>
+  {%if error%}
+  <h1 style="color: red;">{{error}}</h1>
+  {% endif %}
+  <form action="/add-supplier" method="post">
+    <label for="id">Supplier ID:</label>
+    <input type="text" name="id">
+    <label for="name">Name:</label>
+    <input type="text" name="name">
+    <label for="email"> Email:</label>
+    <input type="email" name="email">
+    <label for="numbers">Telephone Numbers:</label>
+    <input type="text" name="numbers">
+    <input type="submit" value="Add Supplier">
+  </form>
+  <a href="/">Back to Home</a>
 
 
-    <!-- <table>
-  <tr>
+  <table>
+    <tr>
       {% for column in columns %}
-    <th>{{column.capitalize()}}</th>
+      <th>{{ column.capitalize() }}</th>
       {% endfor %}
-  </tr>
-     {% for row in data %}
-  <tr>
-      {% for column in columns %}
-    <td>{{row[column]}}</td>
-      {% endfor %}
-  </tr>
+    </tr>
+    {% for row in data %}
+    <tr>
+      <td>{{ row[0] }}</td>
+      <td>{{ row[1] }}</td>
+      <td>{{ row[2] }}</td>
+      <td>{{ row[3] }}</td>
+    </tr>
     {% endfor %}
-
-</table> -->
+  </table>
 
 </body>
 
