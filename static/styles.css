@@ -57,12 +57,13 @@ body {
 }
 
 .icon-item {
-  background-color: azure;
+  background-color: #f4f4f4; 
   border-radius: 10px;
   margin: 1em;
   padding: 1em;
   width: 150px;
   text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
 }
 
 .icon-item img {
@@ -80,39 +81,38 @@ footer {
   width: 100%;
 }
 
-/* Form and button container */
 .form-container {
   text-align: center;
   padding: 20px;
   background-color: #f4f4f4;
-  /* Grey background */
 }
 
-/* Inline form styling */
 form {
   display: inline-block;
-  /* Display form inline */
   margin-right: 20px;
-  /* Spacing between form and 'Back to Home' button */
 }
 
-/* Back to Home button styling, displayed inline next to the form */
+.find-table-button,
 .back-home-button {
   display: inline-block;
   background-color: #3498DB;
   color: white;
-  padding: 10px 20px;
+  padding: 10px 20px; 
   text-decoration: none;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  box-sizing: border-box; 
+  width: 150px; 
+  text-align: center; 
+  font-size: 15px;
 }
 
+.find-table-button:hover,
 .back-home-button:hover {
   background-color: #2980B9;
 }
 
-/* Table Styles */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -141,7 +141,6 @@ tr:nth-child(even) {
   background-color: white;
 }
 
-/* Input styles */
 input[type="text"],
 input[type="email"],
 input[type="submit"] {
@@ -154,7 +153,6 @@ input[type="submit"] {
 input[type="email"],
 input[type="text"] {
   width: calc(100% - 22px);
-  /* Adjust width considering padding and border */
 }
 
 input[type="submit"] {
@@ -162,7 +160,6 @@ input[type="submit"] {
   color: white;
   cursor: pointer;
   margin-right: 0;
-  /* Overrides previous margin-right */
 }
 
 input[type="submit"]:hover {
