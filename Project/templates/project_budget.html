@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Budget Projection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='budget.css') }}">
+</head>
+
+<body>
+    <h1>Budget Projection</h1>
+    <div class="centered-form">
+        <form action="/project-budget" method="post">
+            <div class="input-group">
+                <label for="numYears">Number of years: </label>
+                <input type="number" id="numYears" name="numYears" min="1" max="100">
+            </div>
+            <div class="input-group">
+                <label for="rate">Inflation rate value:</label>
+                <input type="number" id="rate" name="rate" min="1" max="100">
+            </div>
+            <div class="button-group">
+                <button type="submit" class="form-button">Project Budget</button>
+                <a href="/" class="form-button back-home-button">Back to Home</a>
+            </div>
+        </form>
+    </div>
+    {% if data!= [] %}
+    <table>
+        <tr>
+            <th>Year</th>
+            <th>Projected Expenses</th>
+        </tr>
+        {% for row in data %}
+        <tr>
+            <td>{{row[0]}}</td>
+            <td>{{currency(row[1], grouping=True)}}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+    {% endif %}
+</body>
+
+</html>
