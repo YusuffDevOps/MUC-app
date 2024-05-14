@@ -11,11 +11,30 @@
   <div class="form-container">
     <h1>Show Tables</h1>
     <form action="/show-table" method="post" style="display: inline-block; margin-right: 20px;">
-      Table Name: <input type="text" name="name">
-      <input type="submit" value="Find Table">
+
+      Table Name: <input type="text" name="name" value={{table_name}}>
+      <input type="submit" value="Find Table" class="find-table-button">
       <a href="/" class="back-home-button">Back to Home</a>
     </form>
   </div>
+
+  <!-- Filter form -->
+  <form action="/filter-table/{{table_name}}" method="post" class="filter-form">
+    <div class="form-group">
+      <label for="filter">Filter By:</label>
+      <select id="filter" name="filter_column" class="form-control">
+        {% for column in columns %}
+        <option value={{column.capitalize()}}>{{column.capitalize()}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-group">
+      <input type="text" name="filter_value" class="form-control" placeholder="Filter value">
+    </div>
+    <div class="form-group">
+      <input type="submit" value="Apply Filter" class="btn filter-btn">
+    </div>
+  </form>
   <table>
     <tr>
       {% for column in columns %}
