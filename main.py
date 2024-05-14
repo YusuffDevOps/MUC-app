@@ -5,10 +5,10 @@ import locale
 app = Flask(__name__)
 
 # Database configuration
-DB_HOST = 'localhost'
-DB_USER = 'u28'
-DB_NAME = 'u28'
-DB_PASSWORD = 'schoolCLOTHESdeep691'
+DB_HOST = 'bjm2ilghwdekljzhlply-mysql.services.clever-cloud.com'
+DB_USER = 'uhxwhl1fwaww00tv'
+DB_NAME = 'bjm2ilghwdekljzhlply'
+DB_PASSWORD = 'gUEM5LAmUrB7RuwR6Ro4'
 
 #Set locale for currency function 
 locale.setlocale( locale.LC_ALL, 'en_CA.UTF-8' )
